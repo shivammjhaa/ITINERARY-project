@@ -1,0 +1,358 @@
+/* ========== Global Styles ========== */
+body {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(135deg, #f9fbe7, #e1f5fe);
+  color: #333;
+    /* Adventure background */
+  background: url("images/nako.jpeg") center/cover fixed no-repeat;
+  
+  /* Fallback gradient overlay */
+  background-blend-mode: overlay;
+  background-color: rgba(255, 255, 255, 0);
+}
+
+/* ========== Header ========== */
+header {
+  background: url("images/hero_spiti.jpg") center/cover no-repeat; /* Better background */
+  padding: 100px 20px;
+  text-align: center;
+  color: #fff;
+  position: relative;
+  border-bottom-left-radius: 60px;
+  border-bottom-right-radius: 60px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+}
+
+header::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(to bottom right, rgba(0,0,0,0.65), rgba(0,0,0,0.25));
+  z-index: 1;
+}
+
+header h1, .trip-details {
+  position: relative;
+  z-index: 2;
+}
+
+header h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 56px;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 3px 3px 10px rgba(0,0,0,0.8);
+  animation: fadeInDown 1.2s ease-in-out;
+}
+.tagline {
+  font-size: 22px;
+  font-weight: 400;
+  color: #ffca28;
+  text-shadow: 1px 1px 6px rgba(0,0,0,0.8);
+  margin-top: 10px;
+  letter-spacing: 1px;
+}
+
+/* Smooth entrance animation */
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-50px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+
+/* Trip Details Badge */
+.trip-details {
+  background: #ffca28;
+  color: #000;
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 20px;
+  border-radius: 20px;
+}
+.trip-details p { margin: 5px 0; font-weight: 500; font-size: 16px; }
+.trip-details span { color: #000; font-weight: 600; }
+.price-highlight {
+  font-size: 22px;
+  font-weight: bold;
+  color: #d32f2f;
+  background: #fff3e0;
+  padding: 8px 15px;
+  border-radius: 8px;
+  display: inline-block;
+  margin-top: 8px;
+}
+
+/* ========== Container Grid ========== */
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 30px auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 25px;
+}
+
+/* ========== Tile Styling (Itinerary Days) ========== */
+.tile {
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  transition: transform 0.3s;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+.tile:hover { transform: translateY(-8px); }
+.tile img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
+  margin: 0 auto;
+  border-bottom: 1px solid #ddd;
+  cursor: pointer;
+  border-radius: 10px 10px 0 0;
+  transition: transform 0.3s;
+}
+.tile img:hover { transform: scale(1.05); }
+.tile-content { padding: 20px; }
+.tile-content h2 {
+  margin: 0 0 10px;
+  font-family: 'Playfair Display', serif;
+  color: #1e88e5;
+  font-size: 22px;
+}
+.tile-content p { line-height: 1.6; font-size: 15px; color: #333; }
+
+/* ========== Magazine Style (Big Day Cards) ========== */
+.itinerary-day {
+  margin: 40px auto;
+  max-width: 1000px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+  background: #fff;
+}
+.day-image { position: relative; }
+.day-image img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  display: block;
+}
+.day-overlay {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+  color: #fff;
+  padding: 20px;
+}
+.day-overlay h2 { margin: 0; font-size: 18px; font-weight: 400; }
+.day-overlay h3 {
+  margin: 5px 0 0;
+  font-size: 22px;
+  font-family: 'Playfair Display', serif;
+}
+.day-content { padding: 20px; font-size: 15px; line-height: 1.6; }
+.highlights { margin-top: 15px; padding-left: 20px; color: #1e88e5; }
+.day-overlay h2 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #ffffff !important;      /* pure white text */
+  text-shadow: 0 1px 3px rgba(0,0,0,0.8); /* glow for contrast */
+}
+
+/* ===== ACCOMMODATION - Clear hotel name & stars ===== */
+
+/* Make sure the card itself is fully opaque (no inherited transparency) */
+.accommodation-card {
+  background: #ffffff;          /* solid white */
+  opacity: 1 !important;       /* ensure no parent opacity bleeds through */
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+  padding: 20px;
+  border-radius: 16px;
+  display: flex;
+  gap: 18px;
+  align-items: center;
+}
+
+/* Text container: keep fully opaque and high z-index */
+.accommodation-info {
+  flex: 1;
+  color: #111;
+  z-index: 2;
+  opacity: 1 !important;
+}
+
+/* Location line (e.g. "3rd Night at Kalpa") */
+.accommodation-info h3 {
+  margin: 0 0 6px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  opacity: 1 !important;
+}
+
+/* HOTEL NAME - make it stand out and fully visible */
+.accommodation-info h4 {
+  display: inline-block;              /* makes background pill enclose text */
+  margin: 6px 0 10px;
+  padding: 6px 10px;
+  background: #ffffff;                 /* white pill for max contrast */
+  color: #0b3d91;                      /* strong readable blue (change if you want) */
+  font-weight: 800;
+  font-size: 20px;
+  line-height: 1;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+  opacity: 1 !important;               /* OVERRIDE any faded rule */
+  text-shadow: none;
+}
+
+/* STAR RATING - fully visible and bright */
+.accommodation-info .stars {
+  display: inline-block;
+  margin: 8px 0;
+  color: #FFD100;                      /* bright gold */
+  font-size: 18px;
+  letter-spacing: 2px;
+  opacity: 1 !important;               /* make sure it's not translucent */
+  text-shadow: 0 1px 0 rgba(0,0,0,0.25);
+}
+
+/* Info paragraphs */
+.accommodation-info p {
+  margin: 6px 0;
+  color: #444;
+  font-size: 14px;
+  opacity: 1 !important;
+}
+
+/* Image container / image - keep normal brightness and allow click/zoom */
+.accommodation-img {
+  margin-left: 18px;
+  flex-shrink: 0;
+}
+.accommodation-img img {
+  width: 280px;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 12px;
+  transition: transform 0.35s ease, filter 0.35s ease;
+  filter: brightness(1);               /* full brightness by default */
+  cursor: pointer;
+}
+.accommodation-img img:hover {
+  transform: scale(1.03);
+  filter: brightness(1.08);
+}
+
+/* Make sure nothing in the ancestry reduces visibility */
+.full-section, .full-section::before, .terms, .terms::before {
+  opacity: 1 !important;
+  filter: none !important;
+}
+
+/* Responsive tweak: stack cards on narrow screens */
+@media (max-width: 780px) {
+  .accommodation-card {
+    flex-direction: column;
+    gap: 12px;
+  }
+  .accommodation-img img { width: 100%; height: 220px; }
+}
+
+.stars { color: #FFD700; font-size: 18px; margin: 6px 0; }
+.accommodation-img { margin-left: 20px; }
+.accommodation-img img {
+  width: 280px;
+  height: 220px;
+  border-radius: 12px;
+  object-fit: cover;
+  transition: all 0.4s ease;
+  filter: brightness(1);   /* ✅ Normal brightness (fixed grey issue) */
+}
+.accommodation-img img:hover {
+  filter: brightness(1.15); /* ✅ Brighter on hover */
+  transform: scale(1.05);
+}
+
+/* ========== Full Section (Inclusions, Terms, etc.) ========== */
+.full-section {
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+  background: url("images/spiti_road.jpg") center/cover fixed no-repeat;
+  padding: 25px;
+  margin: 30px auto;
+  width: 90%;
+  max-width: 1200px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+}
+.full-section::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(255, 255, 255, 0.85);
+  z-index: 0;
+}
+.full-section h2,
+.full-section h3,
+.full-section p,
+.full-section ul,
+.full-section li { position: relative; z-index: 1; }
+.full-section h2 {
+  font-family: 'Playfair Display', serif;
+  color: #6a1b9a;
+  margin-top: 0;
+}
+
+/* ========== Lightbox Popup ========== */
+.lightbox {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.9);
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.lightbox-content {
+  max-width: 80%;
+  max-height: 80%;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+#lightbox-caption {
+  margin-top: 15px;
+  color: #fff;
+  font-size: 20px;
+  font-weight: 600;
+}
+.close {
+  position: absolute;
+  top: 20px;
+  right: 35px;
+  color: #fff;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.close:hover { color: #ffca28; }
+
+/* ========== Footer ========== */
+footer {
+  background: #9300d7;
+  color: #7d0089;
+  text-align: center;
+  padding: 20px;
+  margin-top: 40px;
+}
