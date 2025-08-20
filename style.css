@@ -97,7 +97,8 @@ header h1 {
 
 /* ========== Tile Styling (Itinerary Days) ========== */
 .tile {
-  background: #fff;
+  background: #ffffff !important;   /* pure solid white */
+  opacity: 1 !important;
   border-radius: 16px;
   overflow: hidden;
   box-shadow: 0 8px 20px rgba(0,0,0,0.15);
@@ -105,7 +106,12 @@ header h1 {
   display: flex;
   flex-direction: column;
   text-align: center;
+  position: relative;
+  z-index: 2;
 }
+
+ 
+
 .tile:hover { transform: translateY(-8px); }
 .tile img {
   width: 100%;
@@ -137,6 +143,48 @@ header h1 {
   box-shadow: 0 6px 20px rgba(0,0,0,0.15);
   background: #fff;
 }
+/* ===== Print / PDF Export Styles ===== */
+@media print {
+  body {
+    background: #fff !important;
+    color: #000 !important;
+  }
+  header, footer, .cta-btn, .sticky-cta {
+    display: none !important;  /* hide buttons & extras */
+  }
+  .full-section {
+    background: #fff !important;
+    box-shadow: none !important;
+  }
+  .day-image img {
+    max-height: 200px;
+    object-fit: cover;
+  }
+}
+/* ===== PDF Export Button ===== */
+/* ===== PDF Export Button ===== */
+.pdf-btn {
+  display: inline-block;
+  padding: 12px 28px;
+  margin: 20px auto;
+  border-radius: 30px;
+  background: #d32f2f;        /* bold red for action */
+  color: #fff !important;
+  font-weight: 600;
+  font-size: 16px;
+  text-decoration: none;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.2);
+  transition: all 0.3s ease;
+}
+.pdf-btn:hover {
+  background: #b71c1c;        /* darker red */
+  transform: translateY(-2px);
+}
+.pdf-btn:active {
+  transform: translateY(0);
+}
+
+
 .day-image { position: relative; }
 .day-image img {
   width: 100%;
@@ -283,34 +331,66 @@ header h1 {
 }
 
 /* ========== Full Section (Inclusions, Terms, etc.) ========== */
+/* ====== Sections (Transportation, Inclusions, Exclusions) ====== */
 .full-section {
   position: relative;
   overflow: hidden;
   border-radius: 16px;
-  background: url("images/spiti_road.jpg") center/cover fixed no-repeat;
+  background: rgba(255, 255, 255, 0.98);  /* nearly solid */
   padding: 25px;
   margin: 30px auto;
   width: 90%;
   max-width: 1200px;
   box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+  backdrop-filter: blur(4px); /* subtle glass look */
 }
+
 .full-section::before {
-  content: "";
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(255, 255, 255, 0.85);
-  z-index: 0;
+  content: none !important;  /* prevent double overlay */
 }
-.full-section h2,
-.full-section h3,
-.full-section p,
-.full-section ul,
-.full-section li { position: relative; z-index: 1; }
+
+
+/* Remove hazy overlay */
+.full-section::before {
+  content: none !important;
+}
+
+/* Headings */
 .full-section h2 {
   font-family: 'Playfair Display', serif;
-  color: #6a1b9a;
-  margin-top: 0;
+  font-size: 24px;
+  margin-bottom: 15px;
+  color: #111 !important;
 }
+
+/* Section-specific colors */
+.full-section.transport h2 { color: #1976d2; }   /* blue */
+.full-section.inclusions h2 { color: #2e7d32; } /* green */
+.full-section.exclusions h2 { color: #c62828; } /* red */
+
+/* ===== PDF Download Button ===== */
+.pdf-btn {
+  display: inline-block;
+  padding: 12px 28px;
+  margin: 30px auto;
+  border-radius: 30px;
+  background: #d32f2f;
+  color: #fff !important;
+  font-weight: 600;
+  font-size: 16px;
+  text-decoration: none;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.2);
+  transition: all 0.3s ease;
+  position: relative;   /* keep it above */
+  z-index: 1000;        /* ensure not hidden */
+}
+
+@media print {
+  header, footer, .cta-btn, .sticky-cta {
+    display: none !important;  /* ✅ don’t hide .pdf-btn */
+  }
+}
+
 
 /* ========== Lightbox Popup ========== */
 .lightbox {
@@ -350,9 +430,41 @@ header h1 {
 
 /* ========== Footer ========== */
 footer {
-  background: #9300d7;
+  background: #ccaadc;
   color: #7d0089;
   text-align: center;
   padding: 20px;
   margin-top: 40px;
+}
+/* ===== Print / PDF Export Styles ===== */
+@media print {
+  body {
+    background: #fff !important;
+    color: #000 !important;
+  }
+  header, footer, .cta-btn, .sticky-cta, .pdf-btn {
+    display: none !important; /* hide buttons & extra UI */
+  }
+  .full-section, .itinerary-day {
+    background: #fff !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    padding: 10px !important;
+  }
+  .full-section::before {
+    background: #fff !important; /* remove hazy overlay */
+    content: none !important;
+  }
+  .day-image img {
+    max-height: 200px;
+    object-fit: cover;
+  }
+  .itinerary-day {
+    page-break-inside: avoid;  /* keep each day together */
+    margin-bottom: 20px;
+  }
+  img {
+    max-width: 100% !important;
+    height: auto !important;
+  }
 }
